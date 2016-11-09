@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+
+<title> Scary Title Generator </title>
+
+</head>
+<body>
+<input type="button" value="Create Spooky Title" onClick="randomString()">&nbsp;
+<div id="debug"></div>
+
+<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type = "text/javascript">
+
+function randomString() {
+	
+
+	var nouns = new Array();
+	var adjectives = new Array();
+	var noun1, noun2;
+	var adj1, adj2;
+	var outputStr = '';
+	
+	$.get('nouns.txt', function(txtFile){
+		nouns= txtFile.split("\n");
+	});
+	
+	
+	
+	outputStr += nouns[10];
+	
+	
+	document.getElementById('debug').innerHTML += outputStr+'<br>';
+}
+</script>
+
+</body>
+</html>
