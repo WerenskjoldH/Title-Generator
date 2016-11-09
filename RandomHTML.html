@@ -13,20 +13,31 @@
 <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type = "text/javascript">
 
+var nouns = [];
+var adjectives = [];
+
+$.get('nouns.txt', function(data){
+	//alert("Hello!");
+	nouns = data.split("\n");
+});
+
+$(document).ready(function() {
+    $("div").click(function() {
+	alert("Hello, world!");
+	});
+});
+
 function randomString() {
 	
 
-	var nouns = new Array();
-	var adjectives = new Array();
+
 	var noun1, noun2;
 	var adj1, adj2;
 	var outputStr = '';
 	
-	$.get('nouns.txt', function(txtFile){
-		nouns= txtFile.split("\n");
-	});
+	alert("Hello + " noun[0]);
 	
-	
+
 	
 	outputStr += nouns[10];
 	
@@ -35,5 +46,8 @@ function randomString() {
 }
 </script>
 
+      <div id = "mydiv">
+         Click on this to see a dialogue box.
+      </div>
 </body>
 </html>
