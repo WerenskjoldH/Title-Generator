@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<meta charset="UTF-8" />
+
+<title> Scary Title Generator </title>
+
+</head>
+<body>
+<input type="button" value="Create Spooky Title" onClick="randomString()">&nbsp;
+<div id="debug"></div>
+
+<script type = "text/javascript">
+
+var nouns = new Array();
+var adjectives = new Array();
+
+$(document).ready(function(){
+
+  $.ajax({
+    url: "nouns.txt", // path to file
+    dataType: 'text', // type of file (text, json, xml, etc)
+    success: function(data) { // callback for successful completion
+      nouns = data.split('\n');
+    },
+    error: function() { // callback if there's an error
+      alert("error");
+    }
+  });     
+
+});
+
+$(document).ready(function(){
+
+  $.ajax({
+    url: "nouns.txt", // path to file
+    dataType: 'text', // type of file (text, json, xml, etc)
+    success: function(data) { // callback for successful completion
+      adjectives = data.split('\n');
+    },
+    error: function() { // callback if there's an error
+      alert("error");
+    }
+  });     
+
+});
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+function randomString() {
+	
+	var noun1, noun2;
+	var adj1, adj2;
+	var outputStr = '';
+	
+	noun1 = nouns[Math.floor(Math.random() * nouns.length)];
+	//outputStr += noun1;
+	
+	var nounArray = new Array(nouns.length);
+	var maxNounIndex = 0;
+	for(var i in nouns){
+		if(nouns[i].charAt(0) == noun1.charAt(0))
+		{
+			nounArray[maxNounIndex] = nouns[i];
+			maxNounIndex += 1;
+		}
+	}
+	//alert("Hi");
+	var adjArray = new Array(adjectives.length);
+	var maxAdjIndex = 0;
+	for(var i in adjectives)
+	{
+		if(adjectives[i].charAt(0) == noun1.charAt(0))
+		{
+			adjArray[maxAdjIndex] = adjectives[i];
+			maxAdjIndex += 1;
+		}
+	}
+	
+	noun2 = nounArray[Math.floor(Math.random() * maxNounIndex)];
+	adj1 = adjArray[Math.floor(Math.random() * maxAdjIndex)];
+	adj2 = adjArray[Math.floor(Math.random() * maxAdjIndex)];
+	
+
+	
+	outputStr += adj1.capitalize();
+	outputStr += " " + noun1.capitalize();
+	outputStr += " of "
+	outputStr += adj2.capitalize();
+	outputStr += " " + noun2.capitalize();
+
+	
+	
+	document.getElementById('debug').innerHTML +=  '<br>'+outputStr+'<br>';
+}
+</script>
+
+</body>
+</html>
